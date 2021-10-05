@@ -78,6 +78,8 @@ class HolaMundo(commands.Cog):
             # store the value of "weather"
             # key in variable z
             z = x["weather"]
+
+            weather_icon = z["icon"]
         
             # store the value corresponding
             # to the "description" key at
@@ -85,6 +87,7 @@ class HolaMundo(commands.Cog):
             weather_description = z[0]["description"]
 
             embed = discord.Embed(color=0x2ecc71, title=f"Tiempo en {city_name}")
+            embed.set_image(url=f"https://openweathermap.org/img/wn/{weather_icon}@2x.png")
             embed.add_field(name='Temperatura:', value=f"{current_temperature}°")
             embed.add_field(name='Presion atmosferica:', value=f"{current_pressure} hPa")
             embed.add_field(name='Humedad:', value=f"{current_humidity}%")
