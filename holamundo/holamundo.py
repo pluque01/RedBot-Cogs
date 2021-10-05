@@ -42,7 +42,7 @@ class HolaMundo(commands.Cog):
         
         # complete_url variable to store
         # complete url address
-        complete_url = base_url + "appid=" + openweather_key + "&q=" + city_name
+        complete_url = base_url + "appid=" + openweather_key.get("api_key") + "&q=" + city_name
         
         # get method of requests module
         # return response object
