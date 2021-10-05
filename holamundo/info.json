@@ -1,0 +1,30 @@
+{
+    "author" : [
+        "FallenMeteor"
+    ],
+    "description" : "Get info about the weather.",
+    "disabled" : false,
+    "end_user_data_statement" : "This cog does not persistently store data or metadata about users.",
+    "hidden" : false,
+    "install_msg" : ".",
+    "max_bot_version" : "0.0.0",
+    "min_bot_version" : "3.1.8",
+    "min_python_version" : [
+        3,
+        7,
+        2
+    ],
+    "name" : "holamundo",
+    "permissions" : [
+        "manage_messages"
+    ],
+    "required_cogs" : {},
+    "requirements" : [
+        "requests"
+    ],
+    "short" : "Get info about the weather.",
+    "tags" : [
+        "utility"
+    ],
+    "type" : "COG"
+}
