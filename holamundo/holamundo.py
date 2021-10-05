@@ -1,10 +1,9 @@
 import discord
 from redbot.core import commands
 from redbot.core.bot import Red
-import requests, json
+import requests
+import json
 
-# base_url variable to store url
-base_url = "http://api.openweathermap.org/data/2.5/weather?"
 
 class HolaMundo(commands.Cog):
     def __init__(self, bot):
@@ -30,6 +29,9 @@ class HolaMundo(commands.Cog):
         # await msg.add_reaction("?")
         # self.mutes.append(msg.id)
     async def holamundo(self, ctx):
+
+        # base_url variable to store url
+        base_url = "http://api.openweathermap.org/data/2.5/weather?"
 
         openweather_key = await self.bot.get_shared_api_tokens("openweather")
         if openweather_key.get("api_key") is None:
