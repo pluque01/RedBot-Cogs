@@ -85,7 +85,7 @@ class HolaMundo(commands.Cog):
             weather_description = z[0]["description"]
 
             embed = discord.Embed(color=0x2ecc71, title='Resumen del dia')
-            embed.add_field(name='Temperatura:', value=(current_temperature + "°"))
+            embed.add_field(name='Temperatura:', value=(current_temperature + "Â°"))
             embed.add_field(name='Presion atmosferica:', value=(current_pressure + "hPa"))
             embed.add_field(name='Humedad:', value=(current_humidity+"%"))
             embed.add_field(name='Descripcion:', value=weather_description)
