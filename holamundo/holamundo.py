@@ -42,7 +42,7 @@ class HolaMundo(commands.Cog):
         
         # complete_url variable to store
         # complete url address
-        complete_url = base_url + "appid=" + openweather_key.get("api_key") + "&q=" + city_name
+        complete_url = base_url + "appid=" + openweather_key.get("api_key") + "&q=" + city_name + "&units=metric&lang=es"
         
         # get method of requests module
         # return response object
@@ -83,22 +83,12 @@ class HolaMundo(commands.Cog):
             # to the "description" key at
             # the 0th index of z
             weather_description = z[0]["description"]
-        
-            # print following values
-            print(" Temperature (in kelvin unit) = " +
-                            str(current_temperature) +
-                "\n atmospheric pressure (in hPa unit) = " +
-                            str(current_pressure) +
-                "\n humidity (in percentage) = " +
-                            str(current_humidity) +
-                "\n description = " +
-                            str(weather_description))
 
             embed = discord.Embed(color=0x2ecc71, title='Resumen del dia')
-            embed.add_field(name='Temperature (in kelvin unit) =', value=current_temperature)
-            embed.add_field(name='atmospheric pressure (in hPa unit)', value=current_pressure)
-            embed.add_field(name='humidity (in percentage)', value=current_humidity)
-            embed.add_field(name='description', value=weather_description)
+            embed.add_field(name='Temperatura:', value=(current_temperature + "°"))
+            embed.add_field(name='Presion atmosferica:', value=(current_pressure + "hPa"))
+            embed.add_field(name='Humedad:', value=(current_humidity+"%"))
+            embed.add_field(name='Descripcion:', value=weather_description)
             embed.set_footer(text='Creado por Fallen')   
             await ctx.send(embed=embed)
         
