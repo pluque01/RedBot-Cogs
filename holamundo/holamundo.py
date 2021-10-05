@@ -79,7 +79,7 @@ class HolaMundo(commands.Cog):
             # key in variable z
             z = x["weather"]
 
-            weather_icon = z["icon"]
+            weather_icon = z[0]["icon"]
         
             # store the value corresponding
             # to the "description" key at
