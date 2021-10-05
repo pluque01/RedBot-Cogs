@@ -1,0 +1,105 @@
+import discord
+from redbot.core import commands
+from redbot.core.bot import Red
+import requests, json
+
+# base_url variable to store url
+base_url = "http://api.openweathermap.org/data/2.5/weather?"
+
+class HolaMundo(commands.Cog):
+    def __init__(self, bot):
+        self.bot: Red = bot
+        # self.config = Config.get_conf(
+        #     self,
+        #     identifier={{ cookiecutter.config_identifier }},
+        #     force_registration=True,
+        # )
+
+    # async def red_delete_data_for_user(self, *, requester: RequestType, user_id: int) -> None:
+    #     # TODO: Replace this with the proper end user data removal handling.
+    #     super().red_delete_data_for_user(requester=requester, user_id=user_id)
+
+    @commands.command()
+    # @commands.guild_only()
+    # async def holamundo(self, ctx: commands.Context) -> None:
+        # """Create a reaction emoji to mute users"""
+        # if not await self.config.guild(ctx.guild).mute_role():
+        #     return await ctx.send("No mute role has been setup on this server.")
+        # msg = await ctx.send("React to this message to be muted!")
+        # await msg.add_reaction("?")
+        # await msg.add_reaction("?")
+        # self.mutes.append(msg.id)
+    async def holamundo(self, ctx):
+
+        openweather_key = await self.bot.get_shared_api_tokens("openweather")
+        if openweather_key.get("api_key") is None:
+            return await ctx.send("The Open Weather API has not ben set. Use [p]set api openweather api_key,<your-key>")
+        
+        # Give city name
+        city_name = "Granada"
+        
+        # complete_url variable to store
+        # complete url address
+        complete_url = base_url + "appid=" + openweather_key + "&q=" + city_name
+        
+        # get method of requests module
+        # return response object
+        response = requests.get(complete_url)
+        
+        # json method of response object
+        # convert json format data into
+        # python format data
+        x = response.json()
+        
+        # Now x contains list of nested dictionaries
+        # Check the value of "cod" key is equal to
+        # "404", means city is found otherwise,
+        # city is not found
+        if x["cod"] != "404":
+        
+            # store the value of "main"
+            # key in variable y
+            y = x["main"]
+        
+            # store the value corresponding
+            # to the "temp" key of y
+            current_temperature = y["temp"]
+        
+            # store the value corresponding
+            # to the "pressure" key of y
+            current_pressure = y["pressure"]
+        
+            # store the value corresponding
+            # to the "humidity" key of y
+            current_humidity = y["humidity"]
+        
+            # store the value of "weather"
+            # key in variable z
+            z = x["weather"]
+        
+            # store the value corresponding
+            # to the "description" key at
+            # the 0th index of z
+            weather_description = z[0]["description"]
+        
+            # print following values
+            print(" Temperature (in kelvin unit) = " +
+                            str(current_temperature) +
+                "\n atmospheric pressure (in hPa unit) = " +
+                            str(current_pressure) +
+                "\n humidity (in percentage) = " +
+                            str(current_humidity) +
+                "\n description = " +
+                            str(weather_description))
+
+            embed = discord.Embed(color=0x2ecc71, title='Resumen del dia')
+            embed.add_field(name='Temperature (in kelvin unit) =', value=current_temperature)
+            embed.add_field(name='atmospheric pressure (in hPa unit)', value=current_pressure)
+            embed.add_field(name='humidity (in percentage)', value=current_humidity)
+            embed.add_field(name='description', value=weather_description)
+            embed.set_footer(text='Creado por Fallen')   
+            await ctx.send(embed=embed)
+        
+        else:
+            print(" City Not Found ")
+        
