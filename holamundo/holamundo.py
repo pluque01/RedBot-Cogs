@@ -84,10 +84,10 @@ class HolaMundo(commands.Cog):
             # the 0th index of z
             weather_description = z[0]["description"]
 
-            embed = discord.Embed(color=0x2ecc71, title='Resumen del dia')
-            embed.add_field(name='Temperatura:', value=f"{current_temperature} + °")
-            embed.add_field(name='Presion atmosferica:', value=f"{current_pressure} + hPa")
-            embed.add_field(name='Humedad:', value=f"{current_humidity} + %")
+            embed = discord.Embed(color=0x2ecc71, title=f"Tiempo en {city_name}")
+            embed.add_field(name='Temperatura:', value=f"{current_temperature}°")
+            embed.add_field(name='Presion atmosferica:', value=f"{current_pressure} hPa")
+            embed.add_field(name='Humedad:', value=f"{current_humidity}%")
             embed.add_field(name='Descripcion:', value=weather_description)
             embed.set_footer(text='Creado por Fallen')   
             await ctx.send(embed=embed)
