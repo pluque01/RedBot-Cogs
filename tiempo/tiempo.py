@@ -5,7 +5,7 @@ import requests
 import json
 
 
-class HolaMundo(commands.Cog):
+class Tiempo(commands.Cog):
     def __init__(self, bot):
         self.bot: Red = bot
         # self.config = Config.get_conf(
@@ -28,7 +28,7 @@ class HolaMundo(commands.Cog):
         # await msg.add_reaction("?")
         # await msg.add_reaction("?")
         # self.mutes.append(msg.id)
-    async def holamundo(self, ctx):
+    async def tiempo(self, ctx):
 
         # base_url variable to store url
         base_url = "http://api.openweathermap.org/data/2.5/weather?"
