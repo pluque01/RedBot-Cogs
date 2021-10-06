@@ -1,6 +1,7 @@
 import discord
 from redbot.core import commands
 from redbot.core.bot import Red
+from redbot.core.utils.menus import menu, DEFAULT_CONTROLS
 import json
 
 
@@ -19,4 +20,7 @@ class CallaCalla(commands.Cog):
         # await msg.add_reaction("?")
         # self.mutes.append(msg.id)
     async def callacalla(self, ctx, member: discord.Member):
+        
         await member.send("Texto de prueba")
+        pages = ["page 1", "page 2", "page 3"]  # or use pagify to split a long string.
+        await menu(ctx, pages, DEFAULT_CONTROLS)
