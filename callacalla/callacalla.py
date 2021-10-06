@@ -28,6 +28,11 @@ class CallaCalla(commands.Cog):
         pred = ReactionPredicate.yes_or_no(msg, member)
         await ctx.bot.wait_for("reaction_add", check=pred)
         if pred.result is True:
-            await member.send("has dicho si")
+            value = random.randint(0,1)
+            if value == 0:
+                await ctx.send(f"ha ganado {ctx.user}")
+            else :
+                await ctx.send(f"ha ganado {member}")
+
         else:
-            await member.send("has dicho no")
+            await ctx.send("has dicho no")
