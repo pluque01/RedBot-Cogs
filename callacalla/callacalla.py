@@ -22,7 +22,7 @@ class CallaCalla(commands.Cog):
         # self.mutes.append(msg.id)
     async def callacalla(self, ctx, member: discord.Member):
 
-        msg = await ctx.send("Yes or no?")
+        msg = await ctx.send(f"Aceptas el reto contra {ctx.author}?")
         start_adding_reactions(msg, ReactionPredicate.YES_OR_NO_EMOJIS)
 
         pred = ReactionPredicate.yes_or_no(msg, member)
