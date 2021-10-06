@@ -31,8 +31,6 @@ class Tiempo(commands.Cog):
         # self.mutes.append(msg.id)
     async def tiempo(self, ctx, city_name: Text):
 
-        city_name.capitalize();
-
         # base_url variable to store url
         base_url = "http://api.openweathermap.org/data/2.5/weather?"
 
@@ -86,7 +84,7 @@ class Tiempo(commands.Cog):
             # the 0th index of z
             weather_description = z[0]["description"]
 
-            embed = discord.Embed(color=0x2ecc71, title=f"Tiempo en {city_name}")
+            embed = discord.Embed(color=0x2ecc71, title=f"Tiempo en {city_name.capitalize()}")
             embed.set_thumbnail(url=f"https://openweathermap.org/img/wn/{weather_icon}@2x.png")
             embed.add_field(name='Temperatura:', value=f"{current_temperature}°")
             embed.add_field(name='Presion atmosferica:', value=f"{current_pressure} hPa")
