@@ -28,7 +28,7 @@ class Tiempo(commands.Cog):
         # await msg.add_reaction("?")
         # await msg.add_reaction("?")
         # self.mutes.append(msg.id)
-    async def tiempo(self, ctx):
+    async def tiempo(self, ctx, city_name):
 
         # base_url variable to store url
         base_url = "http://api.openweathermap.org/data/2.5/weather?"
@@ -36,9 +36,6 @@ class Tiempo(commands.Cog):
         openweather_key = await self.bot.get_shared_api_tokens("openweather")
         if openweather_key.get("api_key") is None:
             return await ctx.send("The Open Weather API has not ben set. Use [p]set api openweather api_key,<your-key>")
-        
-        # Give city name
-        city_name = "Granada"
         
         # complete_url variable to store
         # complete url address
@@ -87,7 +84,7 @@ class Tiempo(commands.Cog):
             weather_description = z[0]["description"]
 
             embed = discord.Embed(color=0x2ecc71, title=f"Tiempo en {city_name}")
-            embed.set_image(url=f"https://openweathermap.org/img/wn/{weather_icon}@2x.png")
+            embed.set_thumbnail(url=f"https://openweathermap.org/img/wn/{weather_icon}@2x.png")
             embed.add_field(name='Temperatura:', value=f"{current_temperature}°")
             embed.add_field(name='Presion atmosferica:', value=f"{current_pressure} hPa")
             embed.add_field(name='Humedad:', value=f"{current_humidity}%")
@@ -96,5 +93,5 @@ class Tiempo(commands.Cog):
             await ctx.send(embed=embed)
         
         else:
-            print(" City Not Found ")
+            print("No encuentro esa ciudad :(")
         
