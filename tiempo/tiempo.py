@@ -29,7 +29,7 @@ class Tiempo(commands.Cog):
         # await msg.add_reaction("?")
         # await msg.add_reaction("?")
         # self.mutes.append(msg.id)
-    async def tiempo(self, ctx, city_name: Text):
+    async def tiempo(self, ctx, *, city_name: Text):
 
         # base_url variable to store url
         base_url = "http://api.openweathermap.org/data/2.5/weather?"
