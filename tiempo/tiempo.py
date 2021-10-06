@@ -1,3 +1,4 @@
+from typing import Text
 import discord
 from redbot.core import commands
 from redbot.core.bot import Red
@@ -28,7 +29,9 @@ class Tiempo(commands.Cog):
         # await msg.add_reaction("?")
         # await msg.add_reaction("?")
         # self.mutes.append(msg.id)
-    async def tiempo(self, ctx, city_name):
+    async def tiempo(self, ctx, city_name: Text):
+
+        city_name.capitalize();
 
         # base_url variable to store url
         base_url = "http://api.openweathermap.org/data/2.5/weather?"
