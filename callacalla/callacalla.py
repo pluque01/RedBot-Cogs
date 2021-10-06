@@ -3,6 +3,8 @@ from redbot.core import commands
 from redbot.core.bot import Red
 from redbot.core.utils.predicates import ReactionPredicate
 from redbot.core.utils.menus import start_adding_reactions
+from random import randint
+
 import json
 
 
