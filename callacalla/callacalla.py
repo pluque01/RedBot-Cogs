@@ -32,7 +32,7 @@ class CallaCalla(commands.Cog):
         if pred.result is True:
             value = randint(0,1)
             if value == 0:
-                await ctx.send(f"ha ganado {ctx.user}")
+                await ctx.send(f"ha ganado {ctx.author}")
             else :
                 await ctx.send(f"ha ganado {member}")
 
