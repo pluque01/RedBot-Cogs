@@ -1,7 +1,8 @@
 import discord
 from redbot.core import commands
 from redbot.core.bot import Red
-from redbot.core.utils.menus import menu, DEFAULT_CONTROLS
+from redbot.core.utils.predicates import ReactionPredicate
+from redbot.core.utils.menus import start_adding_reactions
 import json
 
 
@@ -20,7 +21,13 @@ class CallaCalla(commands.Cog):
         # await msg.add_reaction("?")
         # self.mutes.append(msg.id)
     async def callacalla(self, ctx, member: discord.Member):
-        
-        await member.send("Texto de prueba")
-        pages = ["page 1", "page 2", "page 3"]  # or use pagify to split a long string.
-        await menu(ctx, pages, DEFAULT_CONTROLS)
+
+        msg = await ctx.send("Yes or no?")
+        start_adding_reactions(msg, ReactionPredicate.YES_OR_NO_EMOJIS)
+
+        pred = ReactionPredicate.yes_or_no(msg, member)
+        await ctx.bot.wait_for("reaction_add", check=pred)
+        if pred.result is True:
+            await member.send("has dicho si")
+        else:
+            await member.send("has dicho no")
