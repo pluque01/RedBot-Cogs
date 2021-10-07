@@ -17,7 +17,7 @@ class CallaCalla(commands.Cog):
     @commands.guild_only()
     async def callacalla(self, ctx, member: discord.Member):
 
-        msg = await ctx.send(f"Aceptas el reto contra {ctx.author}?")
+        msg = await ctx.send(f"Aceptas el reto contra {ctx.author.mention}?")
         start_adding_reactions(msg, ReactionPredicate.YES_OR_NO_EMOJIS)
 
         pred = ReactionPredicate.yes_or_no(msg, member)
@@ -25,10 +25,10 @@ class CallaCalla(commands.Cog):
         if pred.result is True:
             value = randint(0,1)
             if value == 0:
-                await ctx.send(f"ha ganado {ctx.author}")
+                await ctx.send(f"Ha ganado {ctx.author.mention}")
                 perdedor = member
             else :
-                await ctx.send(f"ha ganado {member}")
+                await ctx.send(f"Ha ganado {member.mention}")
                 perdedor = ctx.author
 
             # str_perdedor = str(perdedor.id) + ' callacalla 2 minutes'
@@ -37,12 +37,12 @@ class CallaCalla(commands.Cog):
             role = discord.utils.get(ctx.guild.roles, name="callacalla")
 
             await perdedor.add_roles(role)
-            await ctx.send(f"A chuparla {perdedor}")
+            await ctx.send(f"A chuparla {perdedor.mention}")
 
             await asyncio.sleep(60)
             await perdedor.remove_roles(role)
-            await ctx.send(f"{perdedor} ha vuelto a la vida")
+            await ctx.send(f"{perdedor.mention} ha vuelto a la vida")
 
 
         else:
-            await ctx.send("has dicho no")
+            await ctx.send(f"{member.mention} ha sido un cobarde")
