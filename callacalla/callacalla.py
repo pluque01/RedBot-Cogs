@@ -36,11 +36,11 @@ class CallaCalla(commands.Cog):
             # await ctx.invoke(self.bot.get_command("mute"), (perdedor, ' callacalla 2 minutes'))
             role = discord.utils.get(ctx.guild.roles, name="callacalla")
 
-            await member.add_roles(role)
+            await perdedor.add_roles(role)
             await ctx.send("Muteado")
 
             await asyncio.sleep(20)
-            await member.remove_roles(role)
+            await perdedor.remove_roles(role)
             await ctx.send("Ha sido desmuteado")
 
 
