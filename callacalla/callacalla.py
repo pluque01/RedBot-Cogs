@@ -1,12 +1,12 @@
 import discord
 from redbot.core import commands
 from redbot.core.bot import Red
+from discord.utils import get
 from redbot.core.utils.predicates import ReactionPredicate
 from redbot.core.utils.menus import start_adding_reactions
 from random import randint
 
 import json
-
 
 class CallaCalla(commands.Cog):
     def __init__(self, bot):
@@ -14,14 +14,6 @@ class CallaCalla(commands.Cog):
 
     @commands.command()
     @commands.guild_only()
-    # async def holamundo(self, ctx: commands.Context) -> None:
-        # """Create a reaction emoji to mute users"""
-        # if not await self.config.guild(ctx.guild).mute_role():
-        #     return await ctx.send("No mute role has been setup on this server.")
-        # msg = await ctx.send("React to this message to be muted!")
-        # await msg.add_reaction("?")
-        # await msg.add_reaction("?")
-        # self.mutes.append(msg.id)
     async def callacalla(self, ctx, member: discord.Member):
 
         msg = await ctx.send(f"Aceptas el reto contra {ctx.author}?")
@@ -33,8 +25,12 @@ class CallaCalla(commands.Cog):
             value = randint(0,1)
             if value == 0:
                 await ctx.send(f"ha ganado {ctx.author}")
+                perdedor = member
             else :
                 await ctx.send(f"ha ganado {member}")
+                perdedor = ctx.author
+        
+            await ctx.invoke(bot.get_command("mute"), perdedor, "callacalla", "2 minutes")
 
         else:
             await ctx.send("has dicho no")
