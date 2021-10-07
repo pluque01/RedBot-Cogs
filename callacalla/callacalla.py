@@ -30,7 +30,7 @@ class CallaCalla(commands.Cog):
                 await ctx.send(f"ha ganado {member}")
                 perdedor = ctx.author
         
-            await ctx.invoke(bot.get_command("mute"), perdedor, "callacalla", "2 minutes")
+            await ctx.invoke(self.bot.get_command("mute"), perdedor, "callacalla", "2 minutes")
 
         else:
             await ctx.send("has dicho no")
