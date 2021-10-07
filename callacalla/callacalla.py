@@ -1,4 +1,5 @@
 import discord
+import asyncio
 from redbot.core import commands
 from redbot.core.bot import Red
 from discord.utils import get
@@ -30,9 +31,18 @@ class CallaCalla(commands.Cog):
                 await ctx.send(f"ha ganado {member}")
                 perdedor = ctx.author
 
-            str_perdedor = str(perdedor.id) + ' callacalla 2 minutes'
-            await ctx.send(str_perdedor)
-            await ctx.invoke(self.bot.get_command("mute"), (perdedor, ' callacalla 2 minutes'))
+            # str_perdedor = str(perdedor.id) + ' callacalla 2 minutes'
+            # await ctx.send(str_perdedor)
+            # await ctx.invoke(self.bot.get_command("mute"), (perdedor, ' callacalla 2 minutes'))
+            role = discord.utils.get(ctx.guild.roles, name="callacalla")
+
+            await member.add_roles(role)
+            await ctx.send("Muteado")
+
+            await asyncio.sleep(20)
+            await member.remove_roles(role)
+            await ctx.send("Ha sido desmuteado")
+
 
         else:
             await ctx.send("has dicho no")
