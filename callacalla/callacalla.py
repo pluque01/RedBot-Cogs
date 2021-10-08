@@ -37,10 +37,12 @@ class CallaCalla(commands.Cog):
             role = discord.utils.get(ctx.guild.roles, name="callacalla")
 
             await perdedor.add_roles(role)
+            await perdedor.edit(mute=True)
             await ctx.send(f"A chuparla {perdedor.mention}")
 
             await asyncio.sleep(60)
             await perdedor.remove_roles(role)
+            await perdedor.edit(mute=False)
             await ctx.send(f"{perdedor.mention} ha vuelto a la vida")
 
 
