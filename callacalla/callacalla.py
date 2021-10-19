@@ -1,3 +1,4 @@
+from re import T
 import discord
 import asyncio
 from redbot.core import commands
@@ -16,35 +17,41 @@ class CallaCalla(commands.Cog):
     @commands.command()
     @commands.guild_only()
     async def callacalla(self, ctx, member: discord.Member):
+        
+        calla_embed = discord.Embed(color=0x2ecc71, title="DESAFIO CALLACALLA")
+        calla_embed.add_field(name=f"{member.mention}", value="", inline=True)
+        calla_embed.add_field(name="vs", value="", inline=True)
+        calla_embed.add_field(name=f"{ctx.author.mention}", value="", inline=True)
 
-        msg = await ctx.send(f"Aceptas el reto contra {ctx.author.mention}?")
-        start_adding_reactions(msg, ReactionPredicate.YES_OR_NO_EMOJIS)
+        sent_embed = await ctx.send(embed=calla_embed)
+        
+        start_adding_reactions(calla_embed, ReactionPredicate.YES_OR_NO_EMOJIS)
+        
+        pred = ReactionPredicate.yes_or_no(calla_embed, member)
 
-        pred = ReactionPredicate.yes_or_no(msg, member)
-        await ctx.bot.wait_for("reaction_add", check=pred)
+        await ctx.bot.wait_for("reaction_add", check=pred, timeout=30)
         if pred.result is True:
             value = randint(0,1)
             if value == 0:
-                await ctx.send(f"Ha ganado {ctx.author.mention}")
+                calla_embed.add_field(name="GANADOR:", value=f"{ctx.author.mention}", inline=True)
+                calla_embed.add_field(name="", value=f"A chuparla {member.mention}", inline=True)
                 perdedor = member
             else :
-                await ctx.send(f"Ha ganado {member.mention}")
+                calla_embed.add_field(name="GANADOR:", value=f"{member.mention}", inline=True)
+                calla_embed.add_field(name="", value=f"A chuparla {ctx.author.mention}", inline=True)
                 perdedor = ctx.author
 
-            # str_perdedor = str(perdedor.id) + ' callacalla 2 minutes'
-            # await ctx.send(str_perdedor)
-            # await ctx.invoke(self.bot.get_command("mute"), (perdedor, ' callacalla 2 minutes'))
+            await sent_embed.edit(calla_embed)
+
             role = discord.utils.get(ctx.guild.roles, name="callacalla")
 
             await perdedor.add_roles(role)
             await perdedor.edit(mute=True)
-            await ctx.send(f"A chuparla {perdedor.mention}")
 
             await asyncio.sleep(60)
             await perdedor.remove_roles(role)
             await perdedor.edit(mute=False)
-            await ctx.send(f"{perdedor.mention} ha vuelto a la vida")
-
 
         else:
-            await ctx.send(f"{member.mention} ha sido un cobarde")
+            calla_embed.add_field(name="", value=f"{member.mention} ha sido un cobarde")
+            await sent_embed.edit(calla_embed)
