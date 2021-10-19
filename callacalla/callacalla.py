@@ -33,12 +33,12 @@ class CallaCalla(commands.Cog):
         if pred.result is True:
             value = randint(0,1)
             if value == 0:
-                calla_embed.add_field(name="GANADOR:", value=f"{ctx.author.mention}", inline=True)
-                calla_embed.add_field(name="A chuparla:", value=f"{member.mention}", inline=True)
+                calla_embed.add_field(name="Ganador:", value=f"{ctx.author.mention}")
+                calla_embed.add_field(name="A chuparla:", value=f"{member.mention}")
                 perdedor = member
             else :
-                calla_embed.add_field(name="GANADOR:", value=f"{member.mention}", inline=True)
-                calla_embed.add_field(name="A chuparla", value=f"{ctx.author.mention}", inline=True)
+                calla_embed.add_field(name="Ganador:", value=f"{member.mention}")
+                calla_embed.add_field(name="A chuparla", value=f"{ctx.author.mention}")
                 perdedor = ctx.author
 
             await sent_embed.edit(embed=calla_embed)
