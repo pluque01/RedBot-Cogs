@@ -41,7 +41,7 @@ class CallaCalla(commands.Cog):
                 calla_embed.add_field(name="A chuparla", value=f"{ctx.author.mention}", inline=True)
                 perdedor = ctx.author
 
-            await sent_embed.edit(calla_embed)
+            await sent_embed.edit(embed=calla_embed)
 
             role = discord.utils.get(ctx.guild.roles, name="callacalla")
 
