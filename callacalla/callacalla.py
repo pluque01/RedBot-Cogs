@@ -20,14 +20,14 @@ class CallaCalla(commands.Cog):
         
         calla_embed = discord.Embed(color=0x2ecc71, title="DESAFIO CALLACALLA")
         calla_embed.add_field(name="Jugador 1:", value=f"{member.mention}", inline=True)
-        calla_embed.add_field(name="vs", value=".", inline=True)
+        calla_embed.add_field(name="vs", value="-", inline=True)
         calla_embed.add_field(name="Jugador 2:", value=f"{ctx.author.mention}", inline=True)
 
         sent_embed = await ctx.send(embed=calla_embed)
         
-        start_adding_reactions(calla_embed, ReactionPredicate.YES_OR_NO_EMOJIS)
+        start_adding_reactions(sent_embed, ReactionPredicate.YES_OR_NO_EMOJIS)
         
-        pred = ReactionPredicate.yes_or_no(calla_embed, member)
+        pred = ReactionPredicate.yes_or_no(sent_embed, member)
 
         await ctx.bot.wait_for("reaction_add", check=pred, timeout=30)
         if pred.result is True:
