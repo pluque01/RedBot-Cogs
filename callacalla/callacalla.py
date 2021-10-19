@@ -29,7 +29,8 @@ class CallaCalla(commands.Cog):
         
         pred = ReactionPredicate.yes_or_no(sent_embed, member)
 
-        await ctx.bot.wait_for("reaction_add", check=pred, timeout=30)
+        # await ctx.bot.wait_for("reaction_add", check=pred, timeout=30)
+        await ctx.bot.wait_for("reaction_add", check=pred)
         if pred.result is True:
             value = randint(0,1)
             if value == 0:
