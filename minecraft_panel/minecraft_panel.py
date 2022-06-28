@@ -2,7 +2,7 @@
 import discord
 import asyncio
 from redbot.core import Config
-from redbot.core import commands
+from redbot.core import commands, checks
 from redbot.core.bot import Red
 from discord.utils import get
 # from redbot.core.utils.predicates import ReactionPredicate
