@@ -29,7 +29,7 @@ class MinecraftPanel(commands.Cog):
         # Connect
         client = SSHClient()
         client.load_system_host_keys()
-        client.connect(server, user)
+        client.connect(server, username=user)
 
         # Run a command
         stdin, stdout, stderr = client.exec_command(command)#'cd /home/mc/minecraft-server/RAD/RAD-Serverpack-1.50 && ./LaunchServer.sh')
