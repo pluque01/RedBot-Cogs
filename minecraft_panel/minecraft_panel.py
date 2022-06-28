@@ -28,6 +28,7 @@ class MinecraftPanel(commands.Cog):
     def executeCommandSSH(server, user, command : str):
         # Connect
         client = paramiko.SSHClient()
+        client.look_for_keys(True)
         client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         client.load_system_host_keys()
         client.connect(server, username=user)
