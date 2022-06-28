@@ -30,7 +30,7 @@ class MinecraftPanel(commands.Cog):
         client = paramiko.SSHClient()
         client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         client.load_system_host_keys()
-        client.connect(server, username=user, look_for_keys=True)
+        client.connect(server, username=user, key_filename='~/.ssh/id_rsa')
 
         # Run a command
         stdin, stdout, stderr = client.exec_command(command)#'cd /home/mc/minecraft-server/RAD/RAD-Serverpack-1.50 && ./LaunchServer.sh')
