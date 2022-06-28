@@ -5,7 +5,7 @@ from redbot.core import Config
 from redbot.core import commands, checks
 from redbot.core.bot import Red
 from discord.utils import get
-from paramiko import SSHClient
+import paramiko
 # from redbot.core.utils.predicates import ReactionPredicate
 # from redbot.core.utils.menus import start_adding_reactions
 # from random import randint
@@ -27,8 +27,8 @@ class MinecraftPanel(commands.Cog):
 
     def executeCommandSSH(server, user, command : str):
         # Connect
-        client = SSHClient()
-        client.set_missing_host_key_policy(AutoAddPolicy())
+        client = paramiko.SSHClient()
+        client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         client.load_system_host_keys()
         client.connect(server, username=user)
 
