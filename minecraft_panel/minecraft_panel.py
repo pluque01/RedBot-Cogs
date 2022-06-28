@@ -28,6 +28,7 @@ class MinecraftPanel(commands.Cog):
     def executeCommandSSH(server, user, command : str):
         # Connect
         client = SSHClient()
+        client.set_missing_host_key_policy(AutoAddPolicy())
         client.load_system_host_keys()
         client.connect(server, username=user)
 
