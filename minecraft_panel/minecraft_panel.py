@@ -31,13 +31,13 @@ class MinecraftPanel(commands.Cog):
     @commands.command()
     @checks.is_owner()
     async def mcsetport(self, ctx, new_port : str):
-        await self.config.ServerIP.set(new_port)
+        await self.config.ServerPort.set(new_port)
         await ctx.send("The port of the server has been changed!")
 
     @commands.command()
     @checks.is_owner()
     async def mcsetpasswd(self, ctx, new_passwd : str):
-        await self.config.ServerIP.set(new_passwd)
+        await self.config.Password.set(new_passwd)
         await ctx.send("The password of the server has been changed!")
 
     @commands.command()
