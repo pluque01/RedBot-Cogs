@@ -29,6 +29,24 @@ class MinecraftPanel(commands.Cog):
         await ctx.send("The IP of the server has been changed!")
 
     @commands.command()
+    @checks.is_owner()
+    async def mcsetport(self, ctx, new_port : str):
+        await self.config.ServerIP.set(new_port)
+        await ctx.send("The port of the server has been changed!")
+
+    @commands.command()
+    @checks.is_owner()
+    async def mcsetpasswd(self, ctx, new_passwd : str):
+        await self.config.ServerIP.set(new_passwd)
+        await ctx.send("The password of the server has been changed!")
+
+    @commands.command()
     async def mcserverinfo(self, ctx):
         server_ip = await self.config.ServerIP()
-        await ctx.send(f"ServerIP: {server_ip}")
+        server_port = await self.config.ServerPort()
+        embed = discord.Embed(color=0x2ecc71, title="Minecraft Server Info")
+        embed.set_thumbnail(url=f"https://cdn.icon-icons.com/icons2/2699/PNG/512/minecraft_logo_icon_168974.png")
+        embed.add_field(name='Server IP:', value=f"{server_ip}")
+        embed.add_field(name='Port:', value=f"{server_port}")
+        embed.set_footer(text='Creado por Fallen')   
+        await ctx.send(embed=embed)
