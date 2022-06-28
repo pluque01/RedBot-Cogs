@@ -24,11 +24,11 @@ class MinecraftPanel(commands.Cog):
 
     @commands.command()
     @checks.is_owner()
-    async def setip(self, ctx, new_ip : str):
+    async def mcsetip(self, ctx, new_ip : str):
         await self.config.ServerIP.set(new_ip)
         await ctx.send("The IP of the server has been changed!")
 
     @commands.command()
-    async def serverinfo(self, ctx):
+    async def mcserverinfo(self, ctx):
         server_ip = await self.config.ServerIP()
         await ctx.send(f"ServerIP: {server_ip}")
