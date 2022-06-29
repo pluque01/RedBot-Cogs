@@ -34,9 +34,6 @@ class MinecraftPanel(commands.Cog):
 
         # Run a command
         stdin, stdout, stderr = client.exec_command(command)#'cd /home/mc/minecraft-server/RAD/RAD-Serverpack-1.50 && ./LaunchServer.sh')
-        print(type(stdin))  # <class 'paramiko.channel.ChannelStdinFile'>
-        print(type(stdout))  # <class 'paramiko.channel.ChannelFile'>
-        print(type(stderr))  # <class 'paramiko.channel.ChannelStderrFile'>
 
         # Print output of command. Will wait for command to finish.
         print(f'STDOUT: {stdout.read().decode("utf8")}')

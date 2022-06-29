@@ -20,7 +20,7 @@
     ],
     "required_cogs" : {},
     "requirements" : [
-        "requests"
+        "paramiko"
     ],
     "short" : "",
     "tags" : [
