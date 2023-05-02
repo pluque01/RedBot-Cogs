@@ -20,7 +20,7 @@ class Lyrics(commands.Cog):
             print("No está sonando ninguna canción :((")
             return 
         else:
-            query = f"{lavalink.track.title}"
+            query = f"{lavalink.Track.title}"
             url = "https://api.flowery.pw/v1/lyrics?query=" + urllib.parse.quote(query)
 
             payload={}
