@@ -1,13 +1,10 @@
 from re import T
 import discord
 import lavalink
-import asyncio
 import requests
 import urllib.parse
 from redbot.core import commands
 from redbot.core.bot import Red
-
-import json
 
 class Lyrics(commands.Cog):
     def __init__(self, bot):
@@ -16,10 +13,10 @@ class Lyrics(commands.Cog):
     @commands.command()
     @commands.guild_only()
     async def lyrics(self, ctx):
-        player =  lavalink.get_player(ctx.guild.id)
-        if not (player.current):
+        try:
+            player =  lavalink.get_player(ctx.guild.id)
+        except:
             print("No está sonando ninguna canción :((")
-            return 
         else:
             query = f"{player.current.title}"
             url = "https://api.flowery.pw/v1/lyrics?query=" + urllib.parse.quote(query)
