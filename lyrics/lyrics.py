@@ -16,23 +16,27 @@ class Lyrics(commands.Cog):
         try:
             player =  lavalink.get_player(ctx.guild.id)
         except:
-            print("No está sonando ninguna canción :((")
+            print("El bot no está en ningún canal")
         else:
-            query = f"{player.current.title}"
-            url = "https://api.flowery.pw/v1/lyrics?query=" + urllib.parse.quote(query)
+            try:
+                query = f"{player.current.title}"
+            except:
+                print("No está sonando ninguna canción :((")
+            else:
+                url = "https://api.flowery.pw/v1/lyrics?query=" + urllib.parse.quote(query)
 
-            payload={}
-            headers = {
-            'Accept': 'application/json',
-            'User-Agent': 'Fallen-RedBot'
-            }
-            response = requests.request("GET", url, headers=headers, data=payload)
-            song = response.json()
-            lyrics = song["lyrics"]["text"]
-            artwork = song["track"]["media"]["artwork"]
-            
-            embed = discord.Embed(color=0x2ecc71, title=f"Letra de {query}")
-            embed.set_thumbnail(url=artwork)
-            embed.add_field(name='', value=f"{lyrics}")
-            embed.set_footer(text='Creado por Fallen')   
-            await ctx.send(embed=embed)
+                payload={}
+                headers = {
+                'Accept': 'application/json',
+                'User-Agent': 'Fallen-RedBot'
+                }
+                response = requests.request("GET", url, headers=headers, data=payload)
+                song = response.json()
+                lyrics = song["lyrics"]["text"]
+                artwork = song["track"]["media"]["artwork"]
+                
+                embed = discord.Embed(color=0x2ecc71, title=f"Letra de {query}")
+                embed.set_thumbnail(url=artwork)
+                embed.add_field(name='', value=f"{lyrics}")
+                embed.set_footer(text='Creado por Fallen')   
+                await ctx.send(embed=embed)
