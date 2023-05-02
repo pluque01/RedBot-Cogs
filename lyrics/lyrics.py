@@ -16,11 +16,12 @@ class Lyrics(commands.Cog):
     @commands.command()
     @commands.guild_only()
     async def lyrics(self, ctx):
-        if not (lavalink.Track):
+        player =  lavalink.get_player(ctx.guild.id)
+        if not (player.current):
             print("No está sonando ninguna canción :((")
             return 
         else:
-            query = f"{lavalink.Track.title}"
+            query = f"{player.current.title}"
             url = "https://api.flowery.pw/v1/lyrics?query=" + urllib.parse.quote(query)
 
             payload={}
