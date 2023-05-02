@@ -16,7 +16,7 @@ class Lyrics(commands.Cog):
     @commands.command()
     @commands.guild_only()
     async def lyrics(self, ctx):
-        if not (lavalink.track):
+        if not (lavalink.Track):
             print("No está sonando ninguna canción :((")
             return 
         else:
