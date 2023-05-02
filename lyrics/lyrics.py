@@ -16,12 +16,12 @@ class Lyrics(commands.Cog):
         try:
             player =  lavalink.get_player(ctx.guild.id)
         except:
-            print("El bot no está en ningún canal")
+            await ctx.send("El bot no está en ningún canal")
         else:
             try:
                 query = f"{player.current.title}"
             except:
-                print("No está sonando ninguna canción :((")
+                await ctx.send("No está sonando ninguna canción :((")
             else:
                 url = "https://api.flowery.pw/v1/lyrics?query=" + urllib.parse.quote(query)
 
