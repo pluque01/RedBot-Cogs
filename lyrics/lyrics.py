@@ -40,9 +40,8 @@ class Lyrics(commands.Cog):
                 embed.set_thumbnail(url=artwork)
 
                 max_message_size = 1024 
-                lyrics_split = wrap(lyrics, max_message_size)
-                for split in lyrics_split:
-                    embed.add_field(name='', value=f"{split}")
+                for i in range(0, len(lyrics), max_message_size):
+                    embed.add_field(name='', value=lyrics[i:i+max_message_size], inline=False)
 
                 embed.set_footer(text='Creado por Fallen')   
                 await ctx.send(embed=embed)
