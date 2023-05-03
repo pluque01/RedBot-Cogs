@@ -1,4 +1,5 @@
 from re import T
+from textwrap import wrap
 import discord
 import lavalink
 import requests
@@ -37,6 +38,11 @@ class Lyrics(commands.Cog):
                 
                 embed = discord.Embed(color=0x2ecc71, title=f"Letra de {query}")
                 embed.set_thumbnail(url=artwork)
-                embed.add_field(name='', value=f"{lyrics}")
+
+                max_message_size = 1024 
+                lyrics_split = wrap(lyrics, max_message_size)
+                for split in lyrics_split:
+                    embed.add_field(name='', value=f"{split}")
+
                 embed.set_footer(text='Creado por Fallen')   
                 await ctx.send(embed=embed)
