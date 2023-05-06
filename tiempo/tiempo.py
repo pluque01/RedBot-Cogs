@@ -3,33 +3,18 @@ import discord
 from redbot.core import commands
 from redbot.core.bot import Red
 import requests
-import json
-
 
 class Tiempo(commands.Cog):
     def __init__(self, bot):
         self.bot: Red = bot
-        # self.config = Config.get_conf(
-        #     self,
-        #     identifier={{ cookiecutter.config_identifier }},
-        #     force_registration=True,
-        # )
 
-    # async def red_delete_data_for_user(self, *, requester: RequestType, user_id: int) -> None:
-    #     # TODO: Replace this with the proper end user data removal handling.
-    #     super().red_delete_data_for_user(requester=requester, user_id=user_id)
+    @commands.hybrid_command(name="tiempo")
+    @commands.bot_has_permissions(embed_links=True)
+    @discord.app_commands.describe(
+        ciudad="nombre de la ciudad",
+    )
 
-    @commands.command()
-    # @commands.guild_only()
-    # async def holamundo(self, ctx: commands.Context) -> None:
-        # """Create a reaction emoji to mute users"""
-        # if not await self.config.guild(ctx.guild).mute_role():
-        #     return await ctx.send("No mute role has been setup on this server.")
-        # msg = await ctx.send("React to this message to be muted!")
-        # await msg.add_reaction("?")
-        # await msg.add_reaction("?")
-        # self.mutes.append(msg.id)
-    async def tiempo(self, ctx, *, city_name: Text):
+    async def tiempo(self, ctx: commands.Context, *, ciudad: str):
 
         # base_url variable to store url
         base_url = "http://api.openweathermap.org/data/2.5/weather?"
@@ -40,7 +25,7 @@ class Tiempo(commands.Cog):
         
         # complete_url variable to store
         # complete url address
-        complete_url = base_url + "appid=" + openweather_key.get("api_key") + "&q=" + city_name + "&units=metric&lang=es"
+        complete_url = base_url + "appid=" + openweather_key.get("api_key") + "&q=" + ciudad + "&units=metric&lang=es"
         
         # get method of requests module
         # return response object
@@ -84,7 +69,7 @@ class Tiempo(commands.Cog):
             # the 0th index of z
             weather_description = z[0]["description"]
 
-            embed = discord.Embed(color=0x2ecc71, title=f"Tiempo en {city_name.capitalize()}")
+            embed = discord.Embed(color=0x2ecc71, title=f"Tiempo en {ciudad.capitalize()}")
             embed.set_thumbnail(url=f"https://openweathermap.org/img/wn/{weather_icon}@2x.png")
             embed.add_field(name='Temperatura:', value=f"{current_temperature}°")
             embed.add_field(name='Presion atmosferica:', value=f"{current_pressure} hPa")
@@ -94,5 +79,5 @@ class Tiempo(commands.Cog):
             await ctx.send(embed=embed)
         
         else:
-            print("No encuentro esa ciudad :(")
+            await ctx.send("No encuentro la ciudad")
         
