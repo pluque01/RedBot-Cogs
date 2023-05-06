@@ -14,7 +14,12 @@ class Tiempo(commands.Cog):
         ciudad="nombre de la ciudad",
     )
 
-    async def tiempo(self, ctx: commands.Context, *, ciudad: str):
+    async def tiempo(self, ctx: commands.Context, *, ciudad: str) -> None:
+        """
+        Obtiene información sobre el tiempo en una ciudad determinada 
+
+        `ciudad` debe ser una ciudad valida
+        """
 
         # base_url variable to store url
         base_url = "http://api.openweathermap.org/data/2.5/weather?"

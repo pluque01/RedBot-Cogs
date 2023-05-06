@@ -14,10 +14,18 @@ class CallaCalla(commands.Cog):
     def __init__(self, bot):
         self.bot: Red = bot
 
-    @commands.command()
+    @commands.hybrid_command(name="callacalla")
+    @commands.bot_has_permissions(embed_links=True)
     @commands.guild_only()
-    async def callacalla(self, ctx, member: discord.Member):
-        
+    @discord.app_commands.describe(
+        member = "el miembro al que desafiar",
+    )
+    async def callacalla(self, ctx: commands.Context, member: discord.Member) -> None:
+        """
+        Desafia a un miembro del servidor a un desafio callacalla
+
+        `member` debe ser un usuario valido y conectado a un canal de voz
+        """
         calla_embed = discord.Embed(color=0x2ecc71, title="DESAFIO CALLACALLA")
         calla_embed.add_field(name="Jugador 1:", value=f"{member.mention}", inline=True)
         calla_embed.add_field(name="vs", value="-", inline=True)
