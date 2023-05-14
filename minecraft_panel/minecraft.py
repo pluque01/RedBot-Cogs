@@ -28,7 +28,6 @@ class Minecraft(commands.Cog):
         self,
         ctx: commands.Context,
     ) -> None:
-        await ctx.send("://")
         return
     
     @minecraft.command(name="ip")
