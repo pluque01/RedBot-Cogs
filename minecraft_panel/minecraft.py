@@ -74,7 +74,7 @@ class Minecraft(commands.Cog):
     async def start(
         self,
         ctx: commands.Context,
-        server: str
+        server: str,
     ) -> None:
         """
         Envia una peticion webhook al servidor establecido para iniciar el servidor de minecraft deseado
@@ -96,10 +96,10 @@ class Minecraft(commands.Cog):
         server="El servidor que se quiere detener",
     )
     @checks.is_owner()
-    async def start(
+    async def stop(
         self,
         ctx: commands.Context,
-        server: str
+        server: str,
     ) -> None:
         """
         Envia una peticion webhook al servidor establecido para detener el servidor de minecraft deseado
@@ -126,6 +126,6 @@ class Minecraft(commands.Cog):
         embed = discord.Embed(color=0x2ecc71, title="Minecraft Server Info")
         embed.set_thumbnail(url="https://cdn.icon-icons.com/icons2/2699/PNG/512/minecraft_logo_icon_168974.png")
         embed.add_field(name='Server IP:', value=f"{server_ip}")
-        embed.add_field(name='Port:', value='')
+        embed.add_field(name='Port:', value='25565')
         embed.set_footer(text='Creado por Fallen')   
         await ctx.send(embed=embed)
