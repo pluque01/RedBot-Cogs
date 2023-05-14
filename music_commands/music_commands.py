@@ -19,5 +19,5 @@ class MusicCommands(commands.Cog):
 
         `cancion` debe ser una string que corresponda a una canción
         """
-        await ctx.invoke(self.bot.get_command('play'), query=cancion)
+        await self.invoke(self.bot.get_command('play'), query=cancion)
         
