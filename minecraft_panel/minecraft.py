@@ -39,37 +39,37 @@ class Minecraft(commands.Cog):
     async def setip(
         self,
         ctx: commands.Context,
-        new_ip : str,
+        ip : str,
     ) -> None:
         """
         Establece la direccion IP del servidor
 
         `new_ip` debe ser una ip valida
         """
-        await self.config.ServerIP.set(new_ip)
+        await self.config.ServerIP.set(ip)
         await ctx.send("La IP del servidor ha cambiado")
 
-    @minecraft.command(name="contraseña")
+    @minecraft.command(name="token")
     @discord.app_commands.describe(
-        contraseña="La contraseña para la peticion webhook",
+        token="El token para la peticion webhook",
     )
     @checks.is_owner()
     async def setToken(
         self,
         ctx: commands.Context,
-        new_token: str,
+        token: str,
     ) -> None:
         """
         Establece la contraseña para realizar la petición webhook
 
         `contraseña` debe ser la misma contraseña establecida en la configuracion webhook del servidor
         """
-        await self.config.Token.set(new_token)
+        await self.config.Token.set(token)
         await ctx.send("El token del webhook ha cambiado")
 
     @minecraft.command(name="start")
     @discord.app_commands.describe(
-        servidor="El servidor que se quiere iniciar",
+        server="El servidor que se quiere iniciar",
     )
     @checks.is_owner()
     async def start(
@@ -94,7 +94,7 @@ class Minecraft(commands.Cog):
 
     @minecraft.command(name="stop")
     @discord.app_commands.describe(
-        servidor="El servidor que se quiere detener",
+        server="El servidor que se quiere detener",
     )
     @checks.is_owner()
     async def start(
