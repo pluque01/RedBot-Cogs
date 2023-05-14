@@ -85,7 +85,7 @@ class Minecraft(commands.Cog):
         token = await self.config.Token()
 
         url = f"https://{server_ip}:9000/hooks/launch-server?token={token}"
-        data = {"servidor": server}
+        data = {"servidor": f"{server}"}
 
         requests.post(url, json = data)
 
@@ -110,7 +110,7 @@ class Minecraft(commands.Cog):
         token = await self.config.Token()
 
         url = f"https://{server_ip}:9000/hooks/stop-server?token={token}"
-        data = {"servidor": server}
+        data = {"servidor": f"{server}"}
 
         requests.post(url, json = data)
 
