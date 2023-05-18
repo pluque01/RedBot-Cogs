@@ -87,7 +87,7 @@ class Minecraft(commands.Cog):
         url = f"https://{server_ip}:9000/hooks/launch-server?token={token}"
         requests.post(url, data = {"servidor": f"{server}"})
 
-        await ctx.send("El servidor se está iniciando")
+        await ctx.send(f"El servidor {server} se está iniciando")
 
     @minecraft.command(name="stop")
     @discord.app_commands.describe(
@@ -110,7 +110,7 @@ class Minecraft(commands.Cog):
         url = f"https://{server_ip}:9000/hooks/stop-server?token={token}"
         requests.post(url, data = {"servidor": f"{server}"})
 
-        await ctx.send("El servidor se está deteniendo")
+        await ctx.send(f"El servidor {server} se está deteniendo")
 
     @minecraft.command(name="info")
     @checks.is_owner()
