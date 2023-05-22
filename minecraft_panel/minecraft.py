@@ -86,11 +86,14 @@ class Minecraft(commands.Cog):
     @discord.app_commands.describe(
         server="El servidor que se quiere iniciar",
     )
+    @discord.app_commands.choices(server=[
+        discord.app_commands.Choice(name="NomifactoryCEu", value="nomifactory"),
+    ])
     @checks.is_owner()
     async def start(
         self,
         ctx: commands.Context,
-        server: str,
+        server: discord.app_commands.Choice[str],
     ) -> None:
         """
         Envia una peticion webhook al servidor establecido para iniciar el servidor de minecraft deseado
@@ -119,11 +122,14 @@ class Minecraft(commands.Cog):
     @discord.app_commands.describe(
         server="El servidor que se quiere detener",
     )
+    @discord.app_commands.choices(server=[
+        discord.app_commands.Choice(name="NomifactoryCEu", value="nomifactory"),
+    ])
     @checks.is_owner()
     async def stop(
         self,
         ctx: commands.Context,
-        server: str,
+        server: discord.app_commands.Choice[str],
     ) -> None:
         """
         Envia una peticion webhook al servidor establecido para detener el servidor de minecraft deseado
@@ -174,5 +180,6 @@ class Minecraft(commands.Cog):
         server_ip = await self.config.ServerIP()
         password = await self.config.rconPassword()
         response = await rcon(comando, host=server_ip, port=5000, passwd=password)
-
-        await ctx.send(response)
+        await ctx.send("Comando ejecutado")
+        if response != "":
+            await ctx.send(response)
