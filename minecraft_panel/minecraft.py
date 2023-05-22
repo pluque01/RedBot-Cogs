@@ -4,7 +4,7 @@ import requests
 from redbot.core import Config
 from redbot.core import commands, checks
 from redbot.core.bot import Red
-from rcon.source import Client
+from rcon.source import rcon
 
 
 defaults =  {
@@ -171,9 +171,8 @@ class Minecraft(commands.Cog):
         *,
         comando : str
     ) -> None:
-
         server_ip = await self.config.ServerIP()
-        with Client(server_ip, 5000, passwd=self.config.rconPassword()) as client:
-            response = client.run(comando)        
+        password = await self.config.rconPassword()
+        response = await rcon(comando, host=server_ip, port=5000, passwd=password)
 
         await ctx.send(response)
