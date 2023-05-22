@@ -88,8 +88,8 @@ class Minecraft(commands.Cog):
         if response.status_code == 200:
             embed = discord.Embed(color=0x2ecc71, title="Minecraft Server")
             embed.set_thumbnail(url=pack_images[server])
-            embed.add_field(name='Servidor:', value=f"{server}")
-            embed.add_field(name='Estado:', value="🟢 Servidor iniciándose")
+            embed.add_field(name='Servidor:', value=f"{server}", inline=False)
+            embed.add_field(name='Estado:', value="🟢 Servidor iniciándose", inline=False)
             embed.set_footer(text='Creado por Fallen')   
             await ctx.send(embed=embed)
         else:
@@ -122,8 +122,8 @@ class Minecraft(commands.Cog):
         if response.status_code == 200:
             embed = discord.Embed(color=0x2ecc71, title="Minecraft Server")
             embed.set_thumbnail(url=pack_images[server])
-            embed.add_field(name='Servidor:', value=f"{server}")
-            embed.add_field(name='Estado:', value="🔴 Servidor deteniéndose")
+            embed.add_field(name='Servidor:', value=f"{server}", inline=False)
+            embed.add_field(name='Estado:', value="🔴 Servidor deteniéndose", inline=False)
             embed.set_footer(text='Creado por Fallen')   
             await ctx.send(embed=embed)
         else:
