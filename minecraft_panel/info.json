@@ -19,7 +19,8 @@
     ],
     "required_cogs" : {},
     "requirements" : [
-        "requests"
+        "requests",
+        "rcon"
     ],
     "short" : "",
     "tags" : [

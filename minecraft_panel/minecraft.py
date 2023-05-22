@@ -4,13 +4,14 @@ import requests
 from redbot.core import Config
 from redbot.core import commands, checks
 from redbot.core.bot import Red
-# from redbot.core.utils.predicates import ReactionPredicate
-# from redbot.core.utils.menus import start_adding_reactions
-# from random import randint
+from rcon.source import Client
 
 
-defaults = {"ServerIP": None,
-            "Token": None}
+defaults =  {
+            "ServerIP": None,
+            "Token": None,
+            "rconPassword": None
+            }
 pack_images = {"nomifactory" : "https://media.forgecdn.net/avatars/777/437/638120557907947036.png"}
     
 
@@ -62,6 +63,24 @@ class Minecraft(commands.Cog):
         """
         await self.config.Token.set(token)
         await ctx.send("El token del webhook ha cambiado")
+    
+    @minecraft.command(name="rcon")
+    @discord.app_commands.describe(
+        password="La contraseña para la conexion RCON",
+    )
+    @checks.is_owner()
+    async def setRcon(
+        self,
+        ctx: commands.Context,
+        password: str,
+    ) -> None:
+        """
+        Establece la contraseña para realizar la petición webhook
+
+        `password` debe ser la misma contraseña establecida en la configuracion del servidor
+        """
+        await self.config.rconPassword.set(password)
+        await ctx.send("La password de RCON ha cambiado")
 
     @minecraft.command(name="start")
     @discord.app_commands.describe(
@@ -129,13 +148,12 @@ class Minecraft(commands.Cog):
         else:
             await ctx.send(f"Error {response.status_code}")
 
-
-
     @minecraft.command(name="info")
     @checks.is_owner()
     async def info(
         self,
-        ctx:commands.Context
+        ctx:commands.Context,
+
     ) -> None:
         server_ip = await self.config.ServerIP()
         embed = discord.Embed(color=0x2ecc71, title="Minecraft Server Info")
@@ -144,3 +162,18 @@ class Minecraft(commands.Cog):
         embed.add_field(name='Port:', value='25565')
         embed.set_footer(text='Creado por Fallen')   
         await ctx.send(embed=embed)
+
+    @minecraft.command(name="run")
+    @checks.is_owner()
+    async def run(
+        self,
+        ctx:commands.Context,
+        *,
+        comando : str
+    ) -> None:
+
+        server_ip = await self.config.ServerIP()
+        with Client(server_ip, 5000, passwd=self.config.rconPassword()) as client:
+            response = client.run(comando)        
+
+        await ctx.send(response)
