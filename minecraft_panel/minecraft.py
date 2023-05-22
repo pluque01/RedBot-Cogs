@@ -161,6 +161,9 @@ class Minecraft(commands.Cog):
         ctx:commands.Context,
 
     ) -> None:
+        """
+        Devuelve información varia sobre el servidor
+        """
         server_ip = await self.config.ServerIP()
         embed = discord.Embed(color=0x2ecc71, title="Minecraft Server Info")
         embed.set_thumbnail(url="https://cdn.icon-icons.com/icons2/2699/PNG/512/minecraft_logo_icon_168974.png")
@@ -170,6 +173,9 @@ class Minecraft(commands.Cog):
         await ctx.send(embed=embed)
 
     @minecraft.command(name="run")
+    @discord.app_commands.describe(
+        comando="El comando a ejecutar",
+    )
     @checks.is_owner()
     async def run(
         self,
@@ -177,6 +183,11 @@ class Minecraft(commands.Cog):
         *,
         comando : str
     ) -> None:
+        """
+        Ejecuta un comando en el servidor de minecraft a través del protocolo RCON
+
+        `comando` puede ser cualquier string que acepte el servidor de minecraft 
+        """
         server_ip = await self.config.ServerIP()
         password = await self.config.rconPassword()
         response = await rcon(comando, host=server_ip, port=5000, passwd=password)
