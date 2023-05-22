@@ -102,15 +102,15 @@ class Minecraft(commands.Cog):
         """
         server_ip = await self.config.ServerIP()
         token = await self.config.Token()
-        data = {"server": f"{server}"}
+        data = {"server": f"{server.value}"}
 
         url = f"https://{server_ip}:9000/hooks/launch-server?token={token}"
         response = requests.post(url, json=data, headers={'Content-type': 'application/json'})
 
         if response.status_code == 200:
             embed = discord.Embed(color=0x2ecc71, title="Minecraft Server")
-            embed.set_thumbnail(url=pack_images[server])
-            embed.add_field(name='Servidor:', value=f"{server}", inline=False)
+            embed.set_thumbnail(url=pack_images[server.value])
+            embed.add_field(name='Servidor:', value=f"{server.value}", inline=False)
             embed.add_field(name='Estado:', value="🟢 Servidor iniciándose", inline=False)
             embed.set_footer(text='Creado por Fallen')   
             await ctx.send(embed=embed)
@@ -139,15 +139,15 @@ class Minecraft(commands.Cog):
         server_ip = await self.config.ServerIP()
         token = await self.config.Token()
         
-        data = {"server": f"{server}"}
+        data = {"server": f"{server.value}"}
         url = f"https://{server_ip}:9000/hooks/stop-server?token={token}"
 
         response = requests.post(url, json=data, headers={'Content-type': 'application/json'})
 
         if response.status_code == 200:
             embed = discord.Embed(color=0x2ecc71, title="Minecraft Server")
-            embed.set_thumbnail(url=pack_images[server])
-            embed.add_field(name='Servidor:', value=f"{server}", inline=False)
+            embed.set_thumbnail(url=pack_images[server.value])
+            embed.add_field(name='Servidor:', value=f"{server.value}", inline=False)
             embed.add_field(name='Estado:', value="🔴 Servidor deteniéndose", inline=False)
             embed.set_footer(text='Creado por Fallen')   
             await ctx.send(embed=embed)
