@@ -1,20 +1,17 @@
 # from re import T
 import discord
-import asyncio
 import requests
 from redbot.core import Config
 from redbot.core import commands, checks
 from redbot.core.bot import Red
-from discord.utils import get
 # from redbot.core.utils.predicates import ReactionPredicate
 # from redbot.core.utils.menus import start_adding_reactions
 # from random import randint
 
-import json
 
 defaults = {"ServerIP": None,
             "Token": None}
-
+pack_images = {"nomifactory" : "https://media.forgecdn.net/avatars/777/437/638120557907947036.png"}
     
 
 class Minecraft(commands.Cog):
@@ -83,11 +80,21 @@ class Minecraft(commands.Cog):
         """
         server_ip = await self.config.ServerIP()
         token = await self.config.Token()
+        data = {"server": f"{server}"}
 
         url = f"https://{server_ip}:9000/hooks/launch-server?token={token}"
-        requests.post(url, data = {"servidor": f"{server}"})
+        response = requests.post(url, json=data, headers={'Content-type': 'application/json'})
 
-        await ctx.send(f"El servidor {server} se está iniciando")
+        if response.status_code == 200:
+            embed = discord.Embed(color=0x2ecc71, title="Minecraft Server")
+            embed.set_thumbnail(url=pack_images[server])
+            embed.add_field(name='Servidor:', value=f"{server}")
+            embed.add_field(name='Estado:', value="🟢 Servidor iniciándose")
+            embed.set_footer(text='Creado por Fallen')   
+            await ctx.send(embed=embed)
+        else:
+            await ctx.send(f"Error {response.status_code}")
+
 
     @minecraft.command(name="stop")
     @discord.app_commands.describe(
@@ -106,11 +113,23 @@ class Minecraft(commands.Cog):
         """
         server_ip = await self.config.ServerIP()
         token = await self.config.Token()
-
+        
+        data = {"server": f"{server}"}
         url = f"https://{server_ip}:9000/hooks/stop-server?token={token}"
-        requests.post(url, data = {"servidor": f"{server}"})
 
-        await ctx.send(f"El servidor {server} se está deteniendo")
+        response = requests.post(url, json=data, headers={'Content-type': 'application/json'})
+
+        if response.status_code == 200:
+            embed = discord.Embed(color=0x2ecc71, title="Minecraft Server")
+            embed.set_thumbnail(url=pack_images[server])
+            embed.add_field(name='Servidor:', value=f"{server}")
+            embed.add_field(name='Estado:', value="🔴 Servidor deteniéndose")
+            embed.set_footer(text='Creado por Fallen')   
+            await ctx.send(embed=embed)
+        else:
+            await ctx.send(f"Error {response.status_code}")
+
+
 
     @minecraft.command(name="info")
     @checks.is_owner()
