@@ -12,7 +12,8 @@ defaults =  {
             "Token": None,
             "rconPassword": None
             }
-pack_images = {"nomifactory" : "https://media.forgecdn.net/avatars/777/437/638120557907947036.png"}
+pack_images = {"nomifactory" : "https://media.forgecdn.net/avatars/777/437/638120557907947036.png",
+               "create-astral" : "https://media.forgecdn.net/avatars/768/269/638104922297531668.png"}
     
 
 class Minecraft(commands.Cog):
