@@ -88,6 +88,7 @@ class Minecraft(commands.Cog):
     )
     @discord.app_commands.choices(server=[
         discord.app_commands.Choice(name="NomifactoryCEu", value="nomifactory"),
+        discord.app_commands.Choice(name="CreateAstral", value="create-astral"),
     ])
     @checks.is_owner()
     async def start(
@@ -124,6 +125,7 @@ class Minecraft(commands.Cog):
     )
     @discord.app_commands.choices(server=[
         discord.app_commands.Choice(name="NomifactoryCEu", value="nomifactory"),
+        discord.app_commands.Choice(name="CreateAstral", value="create-astral"),
     ])
     @checks.is_owner()
     async def stop(
