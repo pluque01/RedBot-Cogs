@@ -13,7 +13,9 @@ defaults =  {
             "rconPassword": None
             }
 pack_images = {"nomifactory" : "https://media.forgecdn.net/avatars/777/437/638120557907947036.png",
-               "create-astral" : "https://media.forgecdn.net/avatars/768/269/638104922297531668.png"}
+               "create-astral" : "https://media.forgecdn.net/avatars/768/269/638104922297531668.png",
+               "terraria" : "https://static.wikia.nocookie.net/terraria_gamepedia/images/7/7f/Guide.png/revision/latest?cb=20191003231144&format=original",
+               }
     
 
 class Minecraft(commands.Cog):
@@ -90,6 +92,7 @@ class Minecraft(commands.Cog):
     @discord.app_commands.choices(server=[
         discord.app_commands.Choice(name="NomifactoryCEu", value="nomifactory"),
         discord.app_commands.Choice(name="CreateAstral", value="create-astral"),
+        discord.app_commands.Choice(name="Terraria", value="terraria"),
     ])
     @checks.is_owner()
     async def start(
@@ -127,6 +130,7 @@ class Minecraft(commands.Cog):
     @discord.app_commands.choices(server=[
         discord.app_commands.Choice(name="NomifactoryCEu", value="nomifactory"),
         discord.app_commands.Choice(name="CreateAstral", value="create-astral"),
+        discord.app_commands.Choice(name="Terraria", value="terraria"),
     ])
     @checks.is_owner()
     async def stop(
