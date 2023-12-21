@@ -1,5 +1,6 @@
 from random import random
 import discord
+import asyncio  # Asegúrate de importar asyncio para las operaciones asíncronas
 from redbot.core import commands
 from discord.utils import get
 from redbot.core.utils.predicates import ReactionPredicate
@@ -35,20 +36,32 @@ class CallaCalla(commands.Cog):
         await ctx.bot.wait_for("reaction_add", check=pred)
         
         if pred.result is True:
-            # Aquí verificamos si el autor es tu usuario con una probabilidad del 80% de ganar
-            if ctx.author.id == 402091707937849345:  # Reemplaza TU_ID_DE_DISCORD con tu ID de Discord real
-                value = random() < 0.8
+            # Se determina la probabilidad de ganar para el autor del comando
+            if ctx.author.id == '402091707937849345':  
+                author_wins = random() < 0.8
             else:
-                value = random() < 0.5  # 50% de probabilidad para cualquier otro usuario
+                author_wins = random() < 0.5
 
-            if value:
-                calla_embed.add_field(name="Ganador:", value=f"{ctx.author.mention}", inline=False)
-                calla_embed.add_field(name="A chuparla:", value=f"{member.mention}", inline=False)
-                perdedor = member
+            # Se determina la probabilidad de ganar para el miembro desafiado
+            if member.id == '402091707937849345':  
+                member_wins = random() < 0.8
             else:
-                calla_embed.add_field(name="Ganador:", value=f"{member.mention}", inline=False)
-                calla_embed.add_field(name="A chuparla", value=f"{ctx.author.mention}", inline=False)
+                member_wins = not author_wins  
+
+            # Se elige al ganador basado en las probabilidades
+            if author_wins:
+                ganador = ctx.author
+                perdedor = member
+            elif member_wins:
+                ganador = member
                 perdedor = ctx.author
+            else:
+                # En caso de que ambos sean tú y ambos pierdan, elige un ganador al azar
+                ganador = ctx.author if random() < 0.5 else member
+                perdedor = member if ganador == ctx.author else ctx.author
+
+            calla_embed.add_field(name="Ganador:", value=f"{ganador.mention}", inline=False)
+            calla_embed.add_field(name="A chuparla:", value=f"{perdedor.mention}", inline=False)
 
             await sent_embed.edit(embed=calla_embed)
 
