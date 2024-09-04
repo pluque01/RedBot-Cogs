@@ -15,6 +15,7 @@ pack_images = {
     "mazerunner": "https://media.forgecdn.net/avatars/768/269/638104922297531668.png",
     "fantasyskies": "https://media.forgecdn.net/avatars/768/269/638104922297531668.png",
     "neotech": "https://media.forgecdn.net/avatars/768/269/638104922297531668.png",
+    "e2e": "https://media.forgecdn.net/avatars/768/269/638104922297531668.png",
 }
 
 
@@ -97,6 +98,7 @@ class Minecraft(commands.Cog):
             discord.app_commands.Choice(name="Mazerunner", value="mazerunner"),
             discord.app_commands.Choice(name="FantasySkies", value="fantasyskies"),
             discord.app_commands.Choice(name="NeoTech", value="neotech"),
+            discord.app_commands.Choice(name="E2E", value="e2e"),
         ]
     )
     @checks.is_owner()
@@ -143,6 +145,7 @@ class Minecraft(commands.Cog):
             discord.app_commands.Choice(name="Mazerunner", value="mazerunner"),
             discord.app_commands.Choice(name="FantasySkies", value="fantasyskies"),
             discord.app_commands.Choice(name="NeoTech", value="neotech"),
+            discord.app_commands.Choice(name="E2E", value="e2e"),
         ]
     )
     @checks.is_owner()
